@@ -1,0 +1,51 @@
+@startuml
+allowmixing
+left to right direction
+
+actor "utilisateur" as UtilisateurActor
+
+class "UI gérer profile" as UIGererProfile <<boundary>> {
+  + afficher(informationProfile)
+  + modifier()
+  + recuperer()
+}
+
+class "C gérer profile" as CGererProfile <<control>> {
+  + select()
+  + charger()
+  + recuperer()
+  + insert()
+}
+package "Modeles" {
+class "profile" as Profile <<entity>> {
+  + idProfile : int
+  + nom : String
+  + prenom : String
+  + photo : String
+  + bio : String
+  + dateNaissance : Date
+  --
+  + select()
+  + insert()
+  + update()
+}
+
+class "utilisateur" as Utilisateur <<entity>> {
+  + idUtilisateur : int
+  + email : String
+  + password : String
+  + username : String
+  --
+  + select()
+  + insert()
+  + update()
+}
+}
+
+UtilisateurActor -- UIGererProfile
+UIGererProfile -- CGererProfile
+CGererProfile -up- Modeles
+
+Profile -- Utilisateur : association
+
+@enduml

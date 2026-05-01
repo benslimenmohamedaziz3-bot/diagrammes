@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+actor "visiteur" as Visiteur
+actor "utilisateur" as Utilisateur
+actor "utilisateur premium" as UtilisateurPremium
+actor "éditeur" as Editeur
+
+rectangle "<<actor>>\nnewsdata.io" as NewsData
+rectangle "<<actor>>\nChat Bot" as ChatBot
+
+usecase "se connecter" as UC_Connecter
+usecase "créer compte" as UC_CreerCompte
+usecase "consulter fil d'actualité" as UC_ConsulterFil
+usecase "filtrer actualité" as UC_FiltrerActualite
+usecase "choisir centre d’intérêt" as UC_ChoisirInteret
+usecase "consulter live" as UC_ConsulterLive
+
+usecase "enregistrer actualité" as UC_EnregistrerActualite
+usecase "s'abonner" as UC_Abonner
+usecase "gérer profile" as UC_GererProfile
+usecase "commenter actualité" as UC_CommenterActualite
+
+usecase "discuter avec AI" as UC_DiscuterAI
+usecase "publier actualité" as UC_PublierActualite
+usecase "modifier actualité" as UC_ModifierActualite
+
+Utilisateur --|> Visiteur
+UtilisateurPremium --|> Utilisateur
+Editeur --|> Utilisateur
+
+Visiteur -- UC_Connecter
+Visiteur -- UC_CreerCompte
+Visiteur -- UC_ConsulterFil
+Visiteur -- UC_ConsulterLive
+
+UC_ConsulterFil ..> UC_FiltrerActualite : <<extend>>
+UC_CreerCompte ..> UC_ChoisirInteret : <<include>>
+UC_ConsulterFil -- NewsData
+UC_ConsulterLive -- NewsData
+
+Utilisateur -- UC_EnregistrerActualite
+Utilisateur -- UC_Abonner
+Utilisateur -- UC_GererProfile
+Utilisateur -- UC_CommenterActualite
+
+UtilisateurPremium -- UC_DiscuterAI
+UC_DiscuterAI -- ChatBot
+
+Editeur -- UC_PublierActualite
+Editeur -- UC_ModifierActualite
+
+@enduml

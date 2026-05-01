@@ -1,0 +1,33 @@
+@startuml
+
+actor Visiteur as visiteur
+
+participant ":IU-SignUp" as IUSignUp
+participant ":IU-Interest" as IUInterest
+participant ":C-SignUp" as CSignUp
+participant ":Compte" as Compte
+participant ":Interest" as Interest
+
+visiteur -> IUSignUp : 1: saisir(email,\npassword,\nconfirm-password)
+visiteur -> IUSignUp : 2: clickBtnContinue()
+
+CSignUp -> CSignUp : 3: charger()
+CSignUp -> Interest : 4: select()
+CSignUp -> IUInterest : 5: afficher()
+
+visiteur -> IUInterest : 6: saisir(interests)
+visiteur -> IUInterest : 7: clickBtnComplete()
+
+IUInterest -> CSignUp : 8: verifier()
+CSignUp -> Compte : 9: select()
+
+alt Compte existe
+    CSignUp -> IUSignUp : 10: afficher("compte existe")
+else
+    IUInterest -> CSignUp : 11: enregistrer()
+    IUSignUp -> CSignUp : 12: enregistrer()
+    CSignUp -> Compte : 13: insert()
+    CSignUp -> Interest : 14: insert()
+end
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+allowmixing
+
+actor "utilisateurpremuim" as Utilisateurpremium
+
+class UI_Live <<boundary>> {
+    -click_button_open_room()
+  + afficherRoom()
+}
+
+class LiveController <<control>> {
+  + openRoom()
+}
+
+package "Modeles" {
+class Room <<entity>> {
+  - id : int
+  - titre : String
+  + chercherRoom()
+}
+
+}
+
+Utilisateurpremium -right- UI_Live
+UI_Live -right- LiveController
+LiveController -- Modeles
+
+@enduml

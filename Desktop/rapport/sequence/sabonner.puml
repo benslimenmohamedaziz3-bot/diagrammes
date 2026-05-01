@@ -1,0 +1,24 @@
+@startuml
+
+actor "utilisateur" as Utilisateur
+
+participant ":UI s'abonner" as UISabonner
+participant ":C s'abonner" as CSabonner
+participant ":Utilisateur" as UtilisateurEntity
+participant ":compte" as Compte
+
+
+Utilisateur -> UISabonner : 1 : saisir(information de payment)
+Utilisateur -> UISabonner : 2 : click_button_payment()
+
+UISabonner -> CSabonner : 3 : verifier()
+
+alt payment valide
+    CSabonner -> UtilisateurEntity : 4 : update()
+    CSabonner -> Compte : 5 : update()
+    CSabonner -> UISabonner : 6 : afficher(payment valide)
+else payment invalide
+    CSabonner -> UISabonner : 7 : afficher(payment invalide)
+end
+
+@enduml

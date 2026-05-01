@@ -1,0 +1,48 @@
+@startuml
+title Diagramme de classe MVC - Commenter actualité
+
+' =========================
+' Vue
+' =========================
+class IU_CommenterActualite <<View>> {
+    +saisir_commentaire()
+    +click_bouton_commenter()
+    +afficher(message : String)
+}
+
+' =========================
+' Contrôleur
+' =========================
+class C_CommenterActualite <<Controller>> {
+    +commenter()
+}
+
+' =========================
+' Modèles
+' =========================
+package "Modeles" {
+class News <<Model>> {
+    -id : int
+    -titre : String
+    -contenu : String
+    -datePublication : Date
+    +update()
+}
+
+class Commentaire <<Model>> {
+    -id : int
+    -contenu : String
+    -dateCommentaire : Date
+    +insert()
+}
+}
+
+' =========================
+' Relations MVC
+' =========================
+IU_CommenterActualite -- C_CommenterActualite : commenter()
+C_CommenterActualite -- Modeles
+News -- Commentaire : association
+
+
+@enduml

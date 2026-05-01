@@ -1,0 +1,24 @@
+@startuml
+
+actor "visiteur" as Visiteur
+actor "utilisateur" as Utilisateur
+actor "utilisateur premium" as UtilisateurPremium
+actor "editeur" as Editeur
+
+usecase "consulter file d'actualité" as ConsulterFileActualite
+usecase "filtrer actualité" as FiltrerActualite
+
+' Force vertical actors
+Visiteur -[hidden]down- Utilisateur
+Utilisateur -[hidden]down- UtilisateurPremium
+Editeur -[hidden]down- Utilisateur
+' Inheritance
+Utilisateur -up-|> Visiteur
+UtilisateurPremium -up-|> Utilisateur
+Editeur -up-|> Utilisateur
+
+' Force use cases from left to right
+Visiteur -right-> ConsulterFileActualite
+FiltrerActualite -.left.> ConsulterFileActualite : <<extend>>
+
+@enduml

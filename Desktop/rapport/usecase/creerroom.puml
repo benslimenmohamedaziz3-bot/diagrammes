@@ -1,0 +1,10 @@
+@startuml
+left to right direction
+
+actor "Éditeur" as Editeur
+
+usecase "Créer room live" as UC1
+
+Editeur --> UC1
+
+@enduml

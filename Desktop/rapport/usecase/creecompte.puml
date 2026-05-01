@@ -1,0 +1,25 @@
+@startuml
+
+actor "visiteur" as Visiteur
+actor "utilisateur" as Utilisateur
+actor "utilisateur premium" as UtilisateurPremium
+actor "editeur" as Editeur
+
+usecase "Créer compte" as CreerCompte
+usecase "choisir centre d’intérêt" as ChoisirInteret
+
+
+' Force vertical actors
+Visiteur -[hidden]down- Utilisateur
+Utilisateur -[hidden]down- UtilisateurPremium
+Editeur -[hidden]down- Utilisateur
+' Inheritance
+Utilisateur -up-|> Visiteur
+UtilisateurPremium -up-|> Utilisateur
+Editeur -up-|> Utilisateur
+
+' Force use cases from left to right
+Visiteur -right-> CreerCompte
+CreerCompte .right.> ChoisirInteret : <<include>>
+
+@enduml

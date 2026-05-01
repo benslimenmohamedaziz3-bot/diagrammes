@@ -1,0 +1,45 @@
+@startuml
+title Diagramme de classe MVC - Enregistrer actualité
+
+' =========================
+' Vue
+' =========================
+class IU_EnregistrerActualite <<View>> {
+    +click_bouton_enregistrer()
+    +afficher(message : String)
+}
+
+' =========================
+' Contrôleur
+' =========================
+class C_EnregistrerActualite <<Controller>> {
+    +enregistrer()
+}
+
+' =========================
+' Modèles
+' =========================
+package "Modeles" {
+    class News <<entity>> {
+        -id : int
+        -titre : String
+        -contenu : String
+        -datePublication : Date
+        +insert()
+    }
+
+    class Profile <<entity>> {
+        -id : int
+        -nom : String
+        -email : String
+        +update()
+    }
+}
+' =========================
+' Relations MVC
+' =========================
+IU_EnregistrerActualite -- C_EnregistrerActualite 
+C_EnregistrerActualite -- Modeles
+Profile -- News : association
+
+@enduml

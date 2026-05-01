@@ -1,0 +1,45 @@
+@startuml
+title Diagramme de classe MVC - Créer Room
+
+class UI_CreerRoom <<boundary>> {
+  - titreInput : String
+  - descriptionInput : String
+  - categorieInput : String
+  + afficherFormulaire()
+  + recupererDonneesFormulaire()
+  + clickButtonCreerRoom()
+}
+
+class UI_Live <<boundary>> {
+  + afficherSucces()
+}
+
+class RoomController <<control>> {
+  + createLiveEvent()
+  - verifier() : boolean
+}
+package "Modeles" {
+class Room <<entity>> {
+  - id : int
+  - titre : String
+  - description : String
+  - categorie : String
+  - dateCreation : Date
+  + insert()
+}
+
+class Editeur <<entity>> {
+  - id : int
+  - nom : String
+  - email : String
+  + remplirFormulaire()
+  + cliquerCreerRoom()
+}
+}
+
+UI_CreerRoom -- RoomController
+RoomController -- Modeles
+UI_Live -- RoomController
+Editeur -- Room : association
+
+@enduml

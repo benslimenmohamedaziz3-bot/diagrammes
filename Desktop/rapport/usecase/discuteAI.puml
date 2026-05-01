@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+
+actor "Utilisateur premium" as UtilisateurPremium
+usecase "Discuter avec AI" as DiscuterAI
+
+UtilisateurPremium -- DiscuterAI
+
+@enduml

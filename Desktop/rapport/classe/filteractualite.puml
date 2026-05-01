@@ -1,0 +1,43 @@
+@startuml
+allowmixing
+left to right direction
+
+actor "Visiteur" as Visiteur
+
+class IUFiltrerActualite <<boundary>> {
+  - boutonFiltrer : Button
+  - champPays : String
+  - champSource : String
+  - champType : String
+  - champDate : Date
+  --
+  + afficherFiltres()
+  + choisirFiltres()
+  + afficherActualites()
+}
+
+class CFiltrerActualite <<control>> {
+  + chargerFiltres()
+  + verifierFiltres()
+  + rechercherActualites()
+  + afficherActualites()
+}
+
+class Actualite <<entity>> {
+  + idActualite : int
+  + titre : String
+  + description : String
+  + categorie : String
+  + pays : String
+  + source : String
+  + datePublication : Date
+  + url : String
+  --
+  + select(filtres)
+}
+
+Visiteur -- IUFiltrerActualite
+IUFiltrerActualite -- CFiltrerActualite
+CFiltrerActualite -- Actualite
+
+@enduml

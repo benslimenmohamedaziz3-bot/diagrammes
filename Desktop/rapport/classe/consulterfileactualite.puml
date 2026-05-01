@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+
+class "IU-fil d'actualité" as Vue <<boundary>> {
+  + afficher()
+}
+
+class "C-fil d'actualité" as Controleur <<control>> {
+  + charger()
+  + afficher()
+}
+package "Modeles" {
+class "actualité" as Actualite <<entity>> {
+  + idActualite : int
+  + titre : string
+  + description : string
+  + categorie : string
+  + pays : string
+  + source : string
+  + datePublication : date
+  + url : string
+  --
+  + select()
+}
+
+}
+
+Vue -- Controleur
+Controleur -- Modeles
+
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+left to right direction
+
+actor "utilisateurpremuim" as Utilisateurpremium
+
+usecase " rejoindre room" as UC1
+
+Utilisateurpremium --> UC1
+
+@enduml

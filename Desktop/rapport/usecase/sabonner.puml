@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+actor "Utilisateur" as Utilisateur
+actor "Utilisateur premium" as UtilisateurPremium
+
+usecase "s'abonner" as Abonner
+
+UtilisateurPremium --|> Utilisateur
+Utilisateur -- Abonner
+
+@enduml

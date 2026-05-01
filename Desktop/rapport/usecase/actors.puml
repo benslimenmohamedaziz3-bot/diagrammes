@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "visiteur" as Visiteur
+
+usecase "se connecter" as UC_Connecter
+usecase "créer compte" as UC_CreerCompte
+usecase "consulter fil d'actualité" as UC_ConsulterFil
+usecase "filtrer actualité" as UC_FiltrerActualite
+usecase "choisir centre d’intérêt" as UC_ChoisirInteret
+
+rectangle "<<actor>>\nnewsdata.io" as NewsData
+
+Visiteur -- UC_Connecter
+Visiteur -- UC_CreerCompte
+Visiteur -- UC_ConsulterFil
+
+UC_FiltrerActualite ..> UC_ConsulterFil : <<extend>>
+UC_CreerCompte ..> UC_ChoisirInteret : <<include>>
+
+UC_ConsulterFil -- NewsData
+
+@enduml

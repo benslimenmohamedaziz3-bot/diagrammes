@@ -1,0 +1,11 @@
+@startuml
+ left to right direction
+actor "Utilisateur" as Utilisateur
+actor "Utilisateur premium" as UtilisateurPremium
+
+usecase "gerer profile" as GererProfile
+
+UtilisateurPremium --|> Utilisateur
+Utilisateur -- GererProfile
+
+@enduml
