@@ -1,0 +1,22 @@
+@startuml
+
+actor "Utilisateur" as Utilisateur
+
+participant ":IU-CommenterActualité" as IU
+participant ":C-CommenterActualité" as C
+participant ":Comment" as Comment
+participant ":News" as News
+
+ref over Utilisateur, News
+D.de sequence relatif au cas d'utilisation << login >>
+end ref
+
+Utilisateur -> IU : 1:saisir(comment)
+Utilisateur -> IU : 2:clickBtnSubmitComment()
+
+IU -> C : 3:ajouter()
+C -> News : 4:select()
+C -> Comment : 5:insert()
+C -> IU : 6:affiche(comment)
+
+@enduml

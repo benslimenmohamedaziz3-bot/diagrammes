@@ -1,0 +1,56 @@
+@startuml
+allowmixing
+left to right direction
+
+actor "Visiteur" as Visiteur
+
+class UI_SignUp <<boundary>> {
+  - emailInput : String
+  - passwordInput : String
+  - confirmPasswordInput : String
+  + afficherFormulaire()
+  + afficherCompteExiste()
+  + afficherCompteCree()
+}
+
+class UI_Interest <<boundary>> {
+  + afficherInterests()
+  + choisirInterest()
+}
+
+class SignUpController <<control>> {
+  + verifier()
+  + enregistrer()
+}
+package "Modeles" {
+class Compte <<entity>> {
+  - id : int
+  - dateCreation : Date
+  + select()
+  + insert()
+}
+
+class Profile <<entity>> {
+  - id : int
+  - email : String
+  - password : String
+  + insert()
+}
+
+class Interest <<entity>> {
+  - id : int
+  - nom : String
+  + insert()
+}
+}
+Visiteur -- UI_SignUp
+Visiteur -- UI_Interest
+
+UI_SignUp -- SignUpController
+UI_Interest -- SignUpController
+
+SignUpController -- Modeles
+
+Profile -- Compte : association
+Interest -- Compte : association
+@enduml

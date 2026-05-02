@@ -1,6 +1,8 @@
 @startuml
+allowmixing
 left to right direction
 
+actor "Visiteur" as Visiteur
 
 class "IU-fil d'actualité" as Vue <<boundary>> {
   + afficher()
@@ -10,23 +12,24 @@ class "C-fil d'actualité" as Controleur <<control>> {
   + charger()
   + afficher()
 }
+
 package "Modeles" {
-class "actualité" as Actualite <<entity>> {
-  + idActualite : int
-  + titre : string
-  + description : string
-  + categorie : string
-  + pays : string
-  + source : string
-  + datePublication : date
-  + url : string
-  --
-  + select()
+  class "Actualité" as Actualite <<entity>> {
+    + idActualite : int
+    + titre : String
+    + description : String
+    + categorie : String
+    + pays : String
+    + source : String
+    + datePublication : Date
+    + url : String
+    --
+    + select()
+  }
 }
 
-}
-
+Visiteur -- Vue
 Vue -- Controleur
-Controleur -- Modeles
+Controleur -- Actualite
 
 @enduml

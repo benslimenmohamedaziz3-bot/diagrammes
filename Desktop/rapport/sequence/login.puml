@@ -1,0 +1,24 @@
+@startuml
+skinparam style robustness
+
+actor Visiteur
+participant "IULogin : IU-login" as IU <<boundary>>
+participant "CLogin : C-login" as C <<control>>
+participant "Profile" as E2 <<entity>>
+
+Visiteur -> IU : saisir(email, password)
+Visiteur -> IU : clickBtnSignIn()
+
+IU -> C : chercher(email, password)
+C -> E2 : select(email, password)
+
+
+alt identifiants corrects
+    C -> E2 : select(id_compte)
+    C --> IU : afficher("Accueil", profil)
+else identifiants incorrects
+    C --> IU : afficher("Erreur", "Email ou mot de passe invalide")
+end
+
+
+@enduml

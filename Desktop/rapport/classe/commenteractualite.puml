@@ -1,6 +1,8 @@
 @startuml
-title Diagramme de classe MVC - Commenter actualité
+allowmixing
+left to right direction
 
+actor "utilisateur" as Utilisateur
 ' =========================
 ' Vue
 ' =========================
@@ -40,7 +42,8 @@ class Commentaire <<Model>> {
 ' =========================
 ' Relations MVC
 ' =========================
-IU_CommenterActualite -- C_CommenterActualite : commenter()
+Utilisateur -- IU_CommenterActualite
+IU_CommenterActualite -- C_CommenterActualite
 C_CommenterActualite -- Modeles
 News -- Commentaire : association
 

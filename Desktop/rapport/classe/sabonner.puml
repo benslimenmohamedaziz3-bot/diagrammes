@@ -1,0 +1,35 @@
+@startuml
+allowmixing
+left to right direction
+
+actor "Utilisateur" as Utilisateur
+
+class "UI s'abonner" as UIAbonner <<boundary>> {
+  - informationPaiement : String
+  + saisirInformationPaiement()
+  + clickButtonPayment()
+  + afficher(message : String)
+}
+
+class "C s'abonner" as CAbonner <<control>> {
+  + verifier()
+}
+package "Modeles" {
+class "Utilisateur" as UtilisateurModel <<entity>> {
+  -id : int
+  -nomComplet : string
+  -photoProfil : string
+  -role : string
+  -estPremium : boolean
+  -planPremium : string
+  -datePremium : datetime
+  --
+  + update()
+}
+}
+Utilisateur -- UIAbonner
+UIAbonner -- CAbonner
+CAbonner -- Modeles
+
+
+@enduml

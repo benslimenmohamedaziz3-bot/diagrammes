@@ -1,0 +1,31 @@
+    @startuml
+title Diagramme de séquence - Enregistrer Actualité
+
+actor "Utilisateur" as Utilisateur
+
+participant ":IU-enregistrerActualité" as IU
+participant ":C-enregistrerActualité" as C
+participant ":Favorite" as Favorite
+participant ":News" as News
+
+ref over Utilisateur, News
+D.de sequence relatif au cas d'utilisation << login >>
+end ref
+
+Utilisateur -> IU : 1:clickBtnEnregistrerActualité()
+
+IU -> C : 2:verifier()
+
+C -> Favorite : 3:select()
+C -> News : 4:select()
+
+alt News deja enregistré
+    C -> Favorite : 6:delete()
+    C -> IU : 8:afficher("save article")
+else News non enregistré
+    IU -> C : 9:enregistrer()
+    C -> Favorite : 10:insert()
+    C -> IU : 11:afficher("saved")
+end
+
+@enduml

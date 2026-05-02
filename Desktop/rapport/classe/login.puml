@@ -1,0 +1,33 @@
+@startuml
+allowmixing
+left to right direction
+actor Visiteur
+
+class IULogin <<boundary>> {
+  - emailInput : String
+  - passwordInput : String
+  + afficherFormulaire()
+  + afficherAccueil()
+  + afficherErreur()
+}
+
+class CLogin <<control>> {
+  + chercher(email : String, password : String)
+  + verifierIdentifiants()
+}
+
+package model {
+class Profile <<entity>> {
+  - id : int
+  - idCompte : int
+  - email : String
+  - password : String
+  + select(email : String, password : String)
+  + select(idCompte : int)
+}
+}
+Visiteur -- IULogin : saisit / clique
+IULogin -- CLogin 
+CLogin -- model 
+
+@enduml
