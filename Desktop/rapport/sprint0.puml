@@ -1,0 +1,50 @@
+ @startuml
+ class Compte <<entity>> {
+    - id : int
+    - dateCreation : Date
+    --
+    + select()
+    + insert()
+  }
+
+  class Profile <<entity>> {
+    - id : int
+    - email : String
+    - password : String
+    --
+    + select()
+    + insert()
+    + update()
+  }
+
+  class Utilisateur <<entity>> {
+    - id : int
+    - nomComplet : String
+    - photoProfil : String
+    - role : String
+    - estPremium : boolean
+    - planPremium : String
+    - datePremium : datetime
+    --
+    + select()
+    + update()
+  }
+    class News <<entity>> {
+    - idNews : int
+    - titre : String
+    - description : String
+    - categorie : String
+    - pays : String
+    - source : String
+    - datePublication : Date
+    - url : String
+    --
+    + select()
+    + insert()
+    + update()
+  }
+
+Profile -- Compte : possède
+Compte -- Interest : choisit
+Profile -- Utilisateur : appartient à
+News -- Utilisateur : publié par

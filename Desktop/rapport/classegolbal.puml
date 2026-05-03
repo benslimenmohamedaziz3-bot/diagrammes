@@ -88,11 +88,10 @@ skinparam classAttributeIconSize 0
   }
 
 Profile -- Compte : possède
-Compte -- Interest : choisit
+Compte -- Interest : choisit/appartient à
 Profile -- Utilisateur : appartient à
-Utilisateur -- Favorite : enregistre
 Favorite -- News : concerne
-News -- Commentaire : reçoit
+News -- Utilisateur : publié par
 Utilisateur -- Commentaire : écrit
 Utilisateur -- Room : crée / rejoint
 
