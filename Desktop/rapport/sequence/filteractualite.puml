@@ -4,16 +4,16 @@ actor "visiteur" as Visiteur
 
 participant ":IU-filtrerActualité" as IUFiltrerActualite
 participant ":C-FiltrerActualité" as CFiltrerActualite
-participant ":actualité" as Actualite
+participant ":News" as News
 
 CFiltrerActualite -> CFiltrerActualite : 1: charger(filters)
-CFiltrerActualite -> Actualite : 2: select()
+CFiltrerActualite -> News : 2: select()
 CFiltrerActualite -> IUFiltrerActualite : 3: affiche(filters)
 
-Visiteur -> IUFiltrerActualite : 5: choisir(filters)
-IUFiltrerActualite -> CFiltrerActualite : 6: verifier(filters)
-CFiltrerActualite -> CFiltrerActualite : 7: charger(actualite)
-CFiltrerActualite -> IUFiltrerActualite : 8: affiche(actualite)
+Visiteur -> IUFiltrerActualite : 4: choisir(filters)
+IUFiltrerActualite -> CFiltrerActualite : 5: verifier(filters)
+CFiltrerActualite -> CFiltrerActualite : 6: charger(actualite)
+CFiltrerActualite -> IUFiltrerActualite : 7: affiche(actualite)
 
 
 @enduml

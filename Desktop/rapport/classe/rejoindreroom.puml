@@ -4,7 +4,8 @@ allowmixing
 actor "utilisateurpremuim" as Utilisateurpremium
 
 class UI_Live <<boundary>> {
-    -click_button_open_room()
+  -buttonOpenRoom : Button
+  + click_button_open_room()
   + afficherRoom()
 }
 
@@ -16,7 +17,7 @@ package "Modeles" {
 class Room <<entity>> {
   - id : int
   - titre : String
-  + chercherRoom()
+  + select()
 }
 
 }

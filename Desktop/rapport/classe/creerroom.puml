@@ -1,22 +1,25 @@
 @startuml
-title Diagramme de classe MVC - Créer Room
+allowmixing
+left to right direction
+actor "Éditeur" as Editeur
 
 class UI_CreerRoom <<boundary>> {
-  - titreInput : String
-  - descriptionInput : String
-  - categorieInput : String
-  + afficherFormulaire()
-  + recupererDonneesFormulaire()
-  + clickButtonCreerRoom()
+  -roomTitre : String
+  -description : String
+  -category : String
+  -coverImageURL : String
+  -createLiveRoomButton : Button
+  + remplirFormulaire()
+  + cliquerCreerRoom()
 }
-
 class UI_Live <<boundary>> {
-  + afficherSucces()
+  -openRoomButton : Button
+  + afficherSuccès()
 }
 
 class RoomController <<control>> {
   + createLiveEvent()
-  - verifier() : boolean
+  + verifier()
 }
 package "Modeles" {
 class Room <<entity>> {
@@ -28,18 +31,10 @@ class Room <<entity>> {
   + insert()
 }
 
-class Editeur <<entity>> {
-  - id : int
-  - nom : String
-  - email : String
-  + remplirFormulaire()
-  + cliquerCreerRoom()
 }
-}
-
+Editeur -- UI_CreerRoom
 UI_CreerRoom -- RoomController
 RoomController -- Modeles
 UI_Live -- RoomController
-Editeur -- Room : association
 
 @enduml

@@ -5,24 +5,24 @@ left to right direction
 actor "Visiteur" as Visiteur
 
 class "IU-fil d'actualité" as Vue <<boundary>> {
+  - actualites : List<News>
   + afficher()
 }
 
 class "C-fil d'actualité" as Controleur <<control>> {
   + charger()
-  + afficher()
 }
 
 package "Modeles" {
-  class "Actualité" as Actualite <<entity>> {
-    + idActualite : int
-    + titre : String
-    + description : String
-    + categorie : String
-    + pays : String
-    + source : String
-    + datePublication : Date
-    + url : String
+  class "News" as News <<entity>> {
+    - idNews : int
+    - titre : String
+    - description : String
+    - categorie : String
+    - pays : String
+    - source : String
+    - datePublication : Date
+    - url : String
     --
     + select()
   }
@@ -30,6 +30,6 @@ package "Modeles" {
 
 Visiteur -- Vue
 Vue -- Controleur
-Controleur -- Actualite
+Controleur -- News
 
 @enduml

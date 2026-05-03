@@ -5,10 +5,9 @@ participant ":UI live" as UI
 participant ":C live" as C
 participant ":room" as Room
 
-Utilisateur -> UI : 1:choisir room
-Utilisateur -> UI : 2:click_button_open_room()
-UI -> C : 3:openRoom()
-C -> Room : 4:chercherRoom()
-C -> UI : 6:afficherRoom()
+Utilisateur -> UI : 1:click_button_open_room()
+UI -> C : 2:ouvreRoom()
+C -> Room : 3:select()
+C -> UI : 4:afficherRoom()
 
 @enduml

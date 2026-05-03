@@ -5,39 +5,38 @@ left to right direction
 actor "Visiteur" as Visiteur
 
 class IUFiltrerActualite <<boundary>> {
-  - boutonFiltrer : Button
+  - boutonsCategorie : List<Button>
   - champPays : String
   - champSource : String
   - champType : String
   - champDate : Date
   --
-  + afficherFiltres()
-  + choisirFiltres()
-  + afficherActualites()
+  + afficher(filtres)
+  + choisir(filtres)
+  + afficher(actualite)
 }
 
 class CFiltrerActualite <<control>> {
-  + chargerFiltres()
-  + verifierFiltres()
-  + rechercherActualites()
-  + afficherActualites()
+  + charger(filtres)
+  + charger(actualite)
+  + verifier(filtres)
 }
 
-class Actualite <<entity>> {
-  + idActualite : int
-  + titre : String
-  + description : String
-  + categorie : String
-  + pays : String
-  + source : String
-  + datePublication : Date
-  + url : String
+class News <<entity>> {
+  - idNews : int
+  - titre : String
+  - description : String
+  - categorie : String
+  - pays : String
+  - source : String
+  - datePublication : Date
+  - url : String
   --
-  + select(filtres)
+  + select()
 }
 
 Visiteur -- IUFiltrerActualite
 IUFiltrerActualite -- CFiltrerActualite
-CFiltrerActualite -- Actualite
+CFiltrerActualite -- News
 
 @enduml

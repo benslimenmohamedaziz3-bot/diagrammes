@@ -17,9 +17,9 @@ CGererProfile -> UIGererProfile : 4 : afficher(information de profile)
 
 Utilisateur -> UIGererProfile : 5 : modifier()
 
-UIGererProfile -> CGererProfile : 6 : recuperer()
+UIGererProfile -> CGererProfile : 6 : changer()
 
-CGererProfile -> Profile : 7 : insert()
-CGererProfile -> UtilisateurEntity : 8 : insert()
+CGererProfile -> Profile : 7 : update()
+CGererProfile -> UtilisateurEntity : 8 : update()
 
 @enduml

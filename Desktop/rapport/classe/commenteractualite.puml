@@ -7,8 +7,10 @@ actor "utilisateur" as Utilisateur
 ' Vue
 ' =========================
 class IU_CommenterActualite <<View>> {
+    -commentaire : String
+    -boutton_post_commentaire : Button
     +saisir_commentaire()
-    +click_bouton_commenter()
+    +click_bouton_post_commentaire()
     +afficher(message : String)
 }
 
@@ -16,22 +18,26 @@ class IU_CommenterActualite <<View>> {
 ' Contrôleur
 ' =========================
 class C_CommenterActualite <<Controller>> {
-    +commenter()
+    +ajouter()
 }
 
 ' =========================
 ' Modèles
 ' =========================
 package "Modeles" {
-class News <<Model>> {
-    -id : int
-    -titre : String
-    -contenu : String
-    -datePublication : Date
+class News <<entity>> {
+    - idActualite : int
+    - titre : String
+    - description : String
+    - categorie : String
+    - pays : String
+    - source : String
+    - datePublication : Date
+    - url : String
     +update()
 }
 
-class Commentaire <<Model>> {
+class Commentaire <<entity>> {
     -id : int
     -contenu : String
     -dateCommentaire : Date

@@ -9,12 +9,11 @@ participant "Profile" as E2 <<entity>>
 Visiteur -> IU : saisir(email, password)
 Visiteur -> IU : clickBtnSignIn()
 
-IU -> C : chercher(email, password)
-C -> E2 : select(email, password)
+IU -> C : chercher()
+C -> E2 : select()
 
 
 alt identifiants corrects
-    C -> E2 : select(id_compte)
     C --> IU : afficher("Accueil", profil)
 else identifiants incorrects
     C --> IU : afficher("Erreur", "Email ou mot de passe invalide")

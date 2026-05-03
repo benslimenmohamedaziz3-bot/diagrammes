@@ -11,8 +11,8 @@ ref over Utilisateur, News
 D.de sequence relatif au cas d'utilisation << login >>
 end ref
 
-Utilisateur -> IU : 1:saisir(comment)
-Utilisateur -> IU : 2:clickBtnSubmitComment()
+Utilisateur -> IU : 1:saisir_commentaire()
+Utilisateur -> IU : 2:click_bouton_post_commentaire()
 
 IU -> C : 3:ajouter()
 C -> News : 4:select()

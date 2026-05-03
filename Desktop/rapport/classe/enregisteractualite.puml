@@ -1,9 +1,6 @@
 @startuml
 allowmixing
 left to right direction
-skinparam linetype ortho
-skinparam nodesep 50
-skinparam ranksep 50
 
 actor "Utilisateur" as Utilisateur
 
@@ -14,7 +11,6 @@ class "IU-enregistrerActualité" as IU <<boundary>> {
 
 class "C-enregistrerActualité" as Controleur <<control>> {
   + verifier()
-  + enregistrer()
 }
 
 package "Modeles" as Modeles {
@@ -28,29 +24,10 @@ package "Modeles" as Modeles {
       + insert()
       + delete()
     }
-    class "News" as News <<entity>> {
-      - idNews : int
-      - titre : String
-      - description : String
-      - categorie : String
-      - source : String
-      - datePublication : Date
-      - url : String
-      --
-      + select()
-      + insert()
-    }
   }
 }
-
-' Hidden constraints to enforce left→right order
-Utilisateur -[hidden]right- IU
-IU -[hidden]right- Controleur
-
-' Visible links (no conflicting directions)
 Utilisateur -- IU
 IU -- Controleur
 Controleur -- Modeles
-Favorite -- News : association
 
 @enduml

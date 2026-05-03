@@ -4,10 +4,10 @@ actor "visiteur" as Visiteur
 
 participant ":IU-fil d'actualité" as IUFilActualite
 participant ":C-fil d'actualité" as CFilActualite
-participant ":actualité" as Actualite
+participant ":News" as News
 
 CFilActualite -> CFilActualite : 1: charger()
-CFilActualite -> Actualite : 2: select()
+CFilActualite -> News : 2: select()
 CFilActualite -> IUFilActualite : 4: affiche()
 
 @enduml

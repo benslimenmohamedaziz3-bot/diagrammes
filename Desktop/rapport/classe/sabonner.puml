@@ -5,7 +5,12 @@ left to right direction
 actor "Utilisateur" as Utilisateur
 
 class "UI s'abonner" as UIAbonner <<boundary>> {
-  - informationPaiement : String
+  - selectedPlan : checkbox
+  -CardFontName : string
+  -CardNumber : int
+  -Expiry : int
+  -CVV : int 
+  - indersand : checkbox
   + saisirInformationPaiement()
   + clickButtonPayment()
   + afficher(message : String)
