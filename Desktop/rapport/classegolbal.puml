@@ -1,0 +1,99 @@
+@startuml
+
+left to right direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+
+  class Compte <<entity>> {
+    - id : int
+    - dateCreation : Date
+    --
+    + select()
+    + insert()
+  }
+
+  class Profile <<entity>> {
+    - id : int
+    - email : String
+    - password : String
+    --
+    + select()
+    + insert()
+    + update()
+  }
+
+  class Utilisateur <<entity>> {
+    - id : int
+    - nomComplet : String
+    - photoProfil : String
+    - role : String
+    - estPremium : boolean
+    - planPremium : String
+    - datePremium : datetime
+    --
+    + select()
+    + update()
+  }
+
+  class Interest <<entity>> {
+    - id : int
+    - nom : String
+    --
+    + insert()
+  }
+
+  class News <<entity>> {
+    - idNews : int
+    - titre : String
+    - description : String
+    - categorie : String
+    - pays : String
+    - source : String
+    - datePublication : Date
+    - url : String
+    --
+    + select()
+    + insert()
+    + update()
+  }
+
+  class Favorite <<entity>> {
+    - idFavorite : int
+    - idUtilisateur : int
+    - idNews : int
+    --
+    + select()
+    + insert()
+    + delete()
+  }
+
+  class Commentaire <<entity>> {
+    - id : int
+    - contenu : String
+    - dateCommentaire : Date
+    --
+    + insert()
+  }
+
+  class Room <<entity>> {
+    - id : int
+    - titre : String
+    - description : String
+    - categorie : String
+    - dateCreation : Date
+    --
+    + select()
+    + insert()
+  }
+
+Profile -- Compte : possède
+Compte -- Interest : choisit
+Profile -- Utilisateur : appartient à
+Utilisateur -- Favorite : enregistre
+Favorite -- News : concerne
+News -- Commentaire : reçoit
+Utilisateur -- Commentaire : écrit
+Utilisateur -- Room : crée / rejoint
+
+@enduml
