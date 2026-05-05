@@ -1,7 +1,12 @@
 @startuml
 allowmixing
-left to right direction
-actor "Éditeur" as Editeur
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "Editeur" as Editeur
 
 class UI_CreerRoom <<boundary>> {
   -roomTitre : String
@@ -12,29 +17,36 @@ class UI_CreerRoom <<boundary>> {
   + remplirFormulaire()
   + cliquerCreerRoom()
 }
+
 class UI_Live <<boundary>> {
   -openRoomButton : Button
-  + afficherSuccès()
+  + afficherSucces()
 }
 
 class RoomController <<control>> {
   + createLiveEvent()
   + verifier()
 }
+
 package "Modeles" {
 class Room <<entity>> {
-  - id : int
+  - <b>id</b> : int
   - titre : String
   - description : String
   - categorie : String
   - dateCreation : Date
   + insert()
 }
-
 }
-Editeur -- UI_CreerRoom
-UI_CreerRoom -- RoomController
-RoomController -- Modeles
-UI_Live -- RoomController
+
+UI_CreerRoom -[hidden]down- UI_Live
+
+UI_CreerRoom -[hidden]right- UI_Live
+
+Editeur -right- UI_CreerRoom
+Editeur -right- UI_Live
+UI_CreerRoom -down- RoomController
+UI_Live -down- RoomController
+RoomController -down- Modeles
 
 @enduml

@@ -1,11 +1,13 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "utilisateur" as Utilisateur
-' =========================
-' Vue
-' =========================
+
 class IU_CommenterActualite <<View>> {
     -commentaire : String
     -boutton_post_commentaire : Button
@@ -14,16 +16,10 @@ class IU_CommenterActualite <<View>> {
     +afficher(message : String)
 }
 
-' =========================
-' Contrôleur
-' =========================
 class C_CommenterActualite <<Controller>> {
     +ajouter()
 }
 
-' =========================
-' Modèles
-' =========================
 package "Modeles" {
 class News <<entity>> {
     - idActualite : int
@@ -45,13 +41,11 @@ class Commentaire <<entity>> {
 }
 }
 
-' =========================
-' Relations MVC
-' =========================
-Utilisateur -- IU_CommenterActualite
-IU_CommenterActualite -- C_CommenterActualite
-C_CommenterActualite -- Modeles
-News -- Commentaire : association
+News -[hidden]down- Commentaire
 
+Utilisateur -right-> IU_CommenterActualite
+IU_CommenterActualite -down-> C_CommenterActualite
+C_CommenterActualite -down-> Modeles
+News -- Commentaire : association
 
 @enduml

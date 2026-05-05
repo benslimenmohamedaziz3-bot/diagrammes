@@ -1,6 +1,10 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor Visiteur
 
@@ -19,15 +23,15 @@ class CLogin <<control>> {
 
 package model {
   class Profile <<entity>> {
-    - id : int
+    - <b>id</b> : int
     - email : String
     - password : String
     + select()
   }
 }
 
-Visiteur -- IULogin
-IULogin -- CLogin
-CLogin -up- model
+Visiteur -right- IULogin
+IULogin -down- CLogin
+CLogin -down- model
 
 @enduml

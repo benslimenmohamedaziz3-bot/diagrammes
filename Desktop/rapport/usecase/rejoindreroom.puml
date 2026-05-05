@@ -1,10 +1,16 @@
 @startuml
 left to right direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
 
-actor "utilisateurpremuim" as Utilisateurpremium
+actor "utilisateur premium" as UtilisateurPremium
 
-usecase " rejoindre room" as UC1
+rectangle "Systeme" as Systeme {
+  usecase "rejoindre room" as UC1
+}
 
-Utilisateurpremium --> UC1
+UtilisateurPremium -- UC1
 
 @enduml

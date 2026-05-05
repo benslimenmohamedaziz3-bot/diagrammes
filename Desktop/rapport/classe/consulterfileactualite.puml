@@ -1,21 +1,25 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "Visiteur" as Visiteur
 
-class "IU-fil d'actualité" as Vue <<boundary>> {
+class "IU-fil d'actualite" as Vue <<boundary>> {
   - actualites : List<News>
   + afficher()
 }
 
-class "C-fil d'actualité" as Controleur <<control>> {
+class "C-fil d'actualite" as Controleur <<control>> {
   + charger()
 }
 
 package "Modeles" {
   class "News" as News <<entity>> {
-    - idNews : int
+    - <b>idNews</b> : int
     - titre : String
     - description : String
     - categorie : String
@@ -28,8 +32,8 @@ package "Modeles" {
   }
 }
 
-Visiteur -- Vue
-Vue -- Controleur
-Controleur -- News
+Visiteur -right-> Vue
+Vue -down-> Controleur
+Controleur -down-> News
 
 @enduml

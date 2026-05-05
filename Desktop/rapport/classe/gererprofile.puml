@@ -1,10 +1,14 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "utilisateur" as UtilisateurActor
 
-class "UI gérer profile" as UIGererProfile <<boundary>> {
+class "UI gerer profile" as UIGererProfile <<boundary>> {
   - firstName : string
   - lastName : string
   - emailAddress : string
@@ -21,13 +25,14 @@ class "UI gérer profile" as UIGererProfile <<boundary>> {
   + recuperer()
 }
 
-class "C gérer profile" as CGererProfile <<control>> {
+class "C gerer profile" as CGererProfile <<control>> {
   + charger()
   + changer()
 }
+
 package "Modeles" {
 class "profile" as Profile <<entity>> {
-  - id : int
+  - <b>id</b> : int
   - email : String
   - password : String
   --
@@ -36,7 +41,7 @@ class "profile" as Profile <<entity>> {
 }
 
 class "utilisateur" as Utilisateur <<entity>> {
-  -id : int
+  -<b>id</b> : int
   -nomComplet : string
   -photoProfil : string
   -role : string
@@ -49,10 +54,11 @@ class "utilisateur" as Utilisateur <<entity>> {
 }
 }
 
-UtilisateurActor -- UIGererProfile
-UIGererProfile -- CGererProfile
-CGererProfile -up- Modeles
+Profile -[hidden]down- Utilisateur
 
-Profile -- Utilisateur
+UtilisateurActor -right- UIGererProfile
+UIGererProfile -right- CGererProfile
+CGererProfile -down- Modeles
+Profile -- Utilisateur : appartient à
 
 @enduml

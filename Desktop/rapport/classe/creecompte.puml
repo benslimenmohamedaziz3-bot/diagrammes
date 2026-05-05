@@ -1,6 +1,10 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "Visiteur" as Visiteur
 
@@ -13,7 +17,6 @@ class UI_SignUp <<boundary>> {
   + saisir(email,password,confirm-password)
   + clickBtnContinue()
   + afficher(message : String)
-
 }
 
 class UI_Interest <<boundary>> {
@@ -27,16 +30,17 @@ class UI_Interest <<boundary>> {
 class SignUpController <<control>> {
   + verifier()
 }
+
 package "Modeles" {
 class Compte <<entity>> {
-  - id : int
+  - <b>id</b> : int
   - dateCreation : Date
   + select()
   + insert()
 }
 
 class Profile <<entity>> {
-  - id : int
+  - <b>id </b>: int
   - email : String
   - password : String
   + insert()
@@ -44,19 +48,24 @@ class Profile <<entity>> {
 }
 
 class Interest <<entity>> {
-  - id : int
+  - <b>id</b> : int
   - nom : String
   + insert()
 }
 }
-Visiteur -- UI_SignUp
-Visiteur -- UI_Interest
 
-UI_SignUp -- SignUpController
-UI_Interest -- SignUpController
+UI_SignUp -[hidden]down- UI_Interest
+Compte -[hidden]down- Profile
+Profile -[hidden]down- Interest
 
-SignUpController -- Modeles
+UI_SignUp -[hidden]right- UI_Interest
 
-Profile -- Compte 
-Interest -- Compte 
+Visiteur -right- UI_SignUp
+Visiteur -right- UI_Interest
+UI_SignUp -down- SignUpController
+UI_Interest -down- SignUpController
+SignUpController -down- Modeles
+Profile "1" -- "1  " Compte : possède
+Compte "1" -- "0..*" Interest : choisit
+
 @enduml

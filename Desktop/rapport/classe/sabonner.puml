@@ -1,6 +1,10 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "Utilisateur" as Utilisateur
 
@@ -9,7 +13,7 @@ class "UI s'abonner" as UIAbonner <<boundary>> {
   -CardFontName : string
   -CardNumber : int
   -Expiry : int
-  -CVV : int 
+  -CVV : int
   - indersand : checkbox
   + saisirInformationPaiement()
   + clickButtonPayment()
@@ -19,9 +23,10 @@ class "UI s'abonner" as UIAbonner <<boundary>> {
 class "C s'abonner" as CAbonner <<control>> {
   + verifier()
 }
+
 package "Modeles" {
 class "Utilisateur" as UtilisateurModel <<entity>> {
-  -id : int
+  -<b>id</b> : int
   -nomComplet : string
   -photoProfil : string
   -role : string
@@ -32,9 +37,9 @@ class "Utilisateur" as UtilisateurModel <<entity>> {
   + update()
 }
 }
-Utilisateur -- UIAbonner
-UIAbonner -- CAbonner
-CAbonner -- Modeles
 
+Utilisateur -right- UIAbonner
+UIAbonner -down- CAbonner
+CAbonner -down- Modeles
 
 @enduml

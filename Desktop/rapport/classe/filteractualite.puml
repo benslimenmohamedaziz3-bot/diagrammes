@@ -1,6 +1,10 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "Visiteur" as Visiteur
 
@@ -21,9 +25,9 @@ class CFiltrerActualite <<control>> {
   + charger(actualite)
   + verifier(filtres)
 }
-
+package "Modeles" {
 class News <<entity>> {
-  - idNews : int
+  - <b>idNews</b> : int
   - titre : String
   - description : String
   - categorie : String
@@ -34,9 +38,10 @@ class News <<entity>> {
   --
   + select()
 }
+}
 
-Visiteur -- IUFiltrerActualite
-IUFiltrerActualite -- CFiltrerActualite
-CFiltrerActualite -- News
+Visiteur -right- IUFiltrerActualite
+IUFiltrerActualite -down- CFiltrerActualite
+CFiltrerActualite -down- Modeles
 
 @enduml

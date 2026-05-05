@@ -1,24 +1,34 @@
 @startuml
+left to right direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
 
 actor "visiteur" as Visiteur
 actor "utilisateur" as Utilisateur
 actor "utilisateur premium" as UtilisateurPremium
 actor "editeur" as Editeur
 
-usecase "consulter file d'actualité" as ConsulterFileActualite
-usecase "filtrer actualité" as FiltrerActualite
+rectangle "Systeme" as Systeme {
+  usecase "consulter fil d'actualite" as ConsulterFileActualite
+  usecase "filtrer actualite" as FiltrerActualite
 
-' Force vertical actors
+  ConsulterFileActualite -[hidden]down- FiltrerActualite
+}
+
+rectangle "<<actor>>\nnewsdata.io" as NewsData
+
 Visiteur -[hidden]down- Utilisateur
 Utilisateur -[hidden]down- UtilisateurPremium
-Editeur -[hidden]down- Utilisateur
-' Inheritance
+UtilisateurPremium -[hidden]down- Editeur
+
 Utilisateur -up-|> Visiteur
 UtilisateurPremium -up-|> Utilisateur
 Editeur -up-|> Utilisateur
 
-' Force use cases from left to right
-Visiteur -right-> ConsulterFileActualite
-FiltrerActualite -.left.> ConsulterFileActualite : <<extend>>
+Visiteur -- ConsulterFileActualite
+FiltrerActualite ..> ConsulterFileActualite : <<extend>>
+ConsulterFileActualite -- NewsData
 
 @enduml

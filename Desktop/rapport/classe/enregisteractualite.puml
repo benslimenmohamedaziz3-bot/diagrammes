@@ -1,33 +1,35 @@
 @startuml
 allowmixing
-left to right direction
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
 
 actor "Utilisateur" as Utilisateur
 
-class "IU-enregistrerActualité" as IU <<boundary>> {
+class "IU-enregistrerActualite" as IU <<boundary>> {
   + clickBtnEnregistrerActualite()
   + afficher(message : String)
 }
 
-class "C-enregistrerActualité" as Controleur <<control>> {
+class "C-enregistrerActualite" as Controleur <<control>> {
   + verifier()
 }
 
 package "Modeles" as Modeles {
-  together {
-    class "Favorite" as Favorite <<entity>> {
-      - idFavorite : int
-      - idUtilisateur : int
-      - idNews : int
-      --
-      + select()
-      + insert()
-      + delete()
-    }
+  class "Favorite" as Favorite <<entity>> {
+    - <b>idFavorite</b> : int
+    - dateAjout : Date
+    --
+    + select()
+    + insert()
+    + delete()
   }
 }
-Utilisateur -- IU
-IU -- Controleur
-Controleur -- Modeles
+
+Utilisateur -right- IU
+IU -down- Controleur
+Controleur -down- Modeles
 
 @enduml
