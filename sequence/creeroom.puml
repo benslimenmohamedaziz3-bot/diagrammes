@@ -1,0 +1,15 @@
+@startuml
+actor "Éditeur" as Editeur
+participant ":UI cree room" as Frontend
+participant ":UI live" as LiveUI
+participant ":C cree room" as Service
+participant ":room" as Backend
+
+
+Editeur -> Frontend : 1:remplirFormulaire\n(titre, description, catégorie)
+Editeur -> Frontend : 2:cliquerCreerRoom()
+Frontend -> Service : 3:createLiveEvent()
+Service -> Service : 4:Vérifier()
+Service -> Backend : 5:insert()
+Service -> LiveUI : 6:afficherSuccès()
+@enduml

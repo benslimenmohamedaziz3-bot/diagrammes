@@ -1,0 +1,14 @@
+@startuml
+title SequenceDiagram_1
+
+actor utilisateur
+participant ": IU-enregistrer actualite" as IUEnregistrerActualite
+participant ": C : enregistrer actualite" as CEnregistrerActualite
+participant ": news" as news
+participant ": profile" as profile
+utilisateur -> IUEnregistrerActualite : 1 : click_button_enregistrer
+IUEnregistrerActualite -> CEnregistrerActualite : 2 : enregistrer()
+CEnregistrerActualite -> news : 3 : insert()
+CEnregistrerActualite -> profile : 4 : update()
+CEnregistrerActualite --> IUEnregistrerActualite : 5 : afficher("actualite enregistree")
+@enduml

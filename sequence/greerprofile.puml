@@ -1,0 +1,25 @@
+@startuml
+
+actor "utilisateur" as Utilisateur
+
+
+participant ":UI gérer profile" as UIGererProfile
+participant ":C gérer profile" as CGererProfile
+participant ":profile" as Profile
+participant ":utilisateur" as UtilisateurEntity
+
+CGererProfile -> Profile : 1 : select()
+CGererProfile -> UtilisateurEntity : 2 : select()
+
+CGererProfile -> CGererProfile : 3 : charger()
+
+CGererProfile -> UIGererProfile : 4 : afficher(information de profile)
+
+Utilisateur -> UIGererProfile : 5 : modifier()
+
+UIGererProfile -> CGererProfile : 6 : changer()
+
+CGererProfile -> Profile : 7 : update()
+CGererProfile -> UtilisateurEntity : 8 : update()
+
+@enduml

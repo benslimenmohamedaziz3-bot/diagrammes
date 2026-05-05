@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+
+actor "visiteur" as Visiteur
+actor "utilisateur" as Utilisateur
+actor "utilisateur premium" as UtilisateurPremium
+actor "editeur" as Editeur
+
+rectangle "<<actor>>\nnewsdata.io" as NewsData
+rectangle "<<actor>>\nChat Bot" as ChatBot
+
+rectangle "Systeme" as Systeme {
+  usecase "se connecter" as UC_Connecter
+  usecase "creer compte" as UC_CreerCompte
+  usecase "choisir centre d'interet" as UC_ChoisirInteret
+  usecase "consulter fil d'actualite" as UC_ConsulterFil
+  usecase "filtrer actualite" as UC_FiltrerActualite
+  usecase "consulter live" as UC_ConsulterLive
+
+  usecase "enregistrer actualite" as UC_EnregistrerActualite
+  usecase "s'abonner" as UC_Abonner
+  usecase "gerer profile" as UC_GererProfile
+  usecase "commenter actualite" as UC_CommenterActualite
+  usecase "discuter avec AI" as UC_DiscuterAI
+  usecase "publier actualite" as UC_PublierActualite
+  usecase "modifier actualite" as UC_ModifierActualite
+
+  UC_Connecter -[hidden]down- UC_CreerCompte
+  UC_CreerCompte -[hidden]down- UC_ChoisirInteret
+  UC_ChoisirInteret -[hidden]down- UC_ConsulterFil
+  UC_ConsulterFil -[hidden]down- UC_FiltrerActualite
+  UC_FiltrerActualite -[hidden]down- UC_ConsulterLive
+
+  UC_EnregistrerActualite -[hidden]down- UC_Abonner
+  UC_Abonner -[hidden]down- UC_GererProfile
+  UC_GererProfile -[hidden]down- UC_CommenterActualite
+  UC_CommenterActualite -[hidden]down- UC_DiscuterAI
+  UC_DiscuterAI -[hidden]down- UC_PublierActualite
+  UC_PublierActualite -[hidden]down- UC_ModifierActualite
+
+  UC_Connecter -[hidden]right- UC_EnregistrerActualite
+}
+
+Visiteur -[hidden]down- Utilisateur
+Utilisateur -[hidden]down- UtilisateurPremium
+UtilisateurPremium -[hidden]down- Editeur
+NewsData -[hidden]down- ChatBot
+
+Utilisateur --|> Visiteur
+UtilisateurPremium --|> Utilisateur
+Editeur --|> Utilisateur
+
+Visiteur -- UC_Connecter
+Visiteur -- UC_CreerCompte
+Visiteur -- UC_ConsulterFil
+Visiteur -- UC_ConsulterLive
+
+UC_ConsulterFil ..> UC_FiltrerActualite : <<extend>>
+UC_CreerCompte ..> UC_ChoisirInteret : <<include>>
+UC_ConsulterFil -- NewsData
+UC_ConsulterLive -- NewsData
+
+Utilisateur -- UC_EnregistrerActualite
+Utilisateur -- UC_Abonner
+Utilisateur -- UC_GererProfile
+Utilisateur -- UC_CommenterActualite
+
+UtilisateurPremium -- UC_DiscuterAI
+UC_DiscuterAI -- ChatBot
+
+Editeur -- UC_PublierActualite
+Editeur -- UC_ModifierActualite
+
+@enduml

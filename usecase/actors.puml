@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+
+actor "visiteur" as Visiteur
+
+rectangle "Systeme" as Systeme {
+  usecase "se connecter" as UC_Connecter
+  usecase "creer compte" as UC_CreerCompte
+  usecase "consulter fil d'actualite" as UC_ConsulterFil
+  usecase "filtrer actualite" as UC_FiltrerActualite
+  usecase "choisir centre d'interet" as UC_ChoisirInteret
+
+  UC_Connecter -[hidden]down- UC_CreerCompte
+  UC_CreerCompte -[hidden]down- UC_ChoisirInteret
+  UC_Connecter -[hidden]right- UC_ConsulterFil
+  UC_ConsulterFil -[hidden]down- UC_FiltrerActualite
+}
+
+rectangle "<<actor>>\nnewsdata.io" as NewsData
+
+Visiteur -- UC_Connecter
+Visiteur -- UC_CreerCompte
+Visiteur -- UC_ConsulterFil
+
+UC_FiltrerActualite ..> UC_ConsulterFil : <<extend>>
+UC_CreerCompte ..> UC_ChoisirInteret : <<include>>
+UC_ConsulterFil -- NewsData
+
+@enduml

@@ -1,0 +1,132 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity "users" as users {
+  * id : int(11)
+  --
+  full_name : varchar(100)
+  email : varchar(100)
+  created_at : timestamp
+  role : varchar(20)
+  is_premium : tinyint(1)
+  premium_plan : varchar(20)
+  premium_since : datetime
+}
+entity "profile" as profile{
+    *id : int(11)
+    --
+    nom : varchar(20)
+    prenom : varchar(20)
+    profile_photo : longtext
+
+}
+entity "compte" as compte {
+    *id : int(11)
+    --
+    email : varchar(100)
+    password:varchar(100)
+    creation_date : datetime
+}
+
+entity "interests" as interests {
+  * id : int(11)
+  --
+  name : varchar(50)
+}
+
+entity "user_interests" as user_interests {
+  * user_id : int(11)
+  * interest_id : int(11)
+}
+
+entity "source" as source {
+  * id : int(11)
+  --
+  source_name : varchar(100)
+  source_url : varchar(255)
+}
+
+entity "news" as news {
+  * id : int(11)
+  --
+  external_id : varchar(255)
+  title : varchar(255)
+  content : text
+  image_url : varchar(255)
+  article_url : varchar(500)
+  published_at : datetime
+  interest_id : int(11)
+  source_id : int(11)
+  datatype : varchar(50)
+  country : varchar(10)
+}
+
+entity "favorite" as favorite {
+  * user_id : int(11)
+  * news_id : int(11)
+  --
+  saved_at : timestamp
+}
+
+entity "favorite_categories" as favorite_categories {
+  * id : int(11)
+  --
+  user_id : int(11)
+  category : varchar(50)
+}
+
+entity "comments" as comments {
+  * comment_id : int(11)
+  --
+  user_id : int(11)
+  news_id : int(11)
+  comment_content : text
+  createdAt : timestamp
+}
+
+entity "live_events" as live_events {
+  * id : int(11)
+  --
+  title : varchar(200)
+  description : text
+  category : varchar(50)
+  cover_image : varchar(500)
+  stream_url : varchar(500)
+  status : varchar(20)
+  premium_only : tinyint(1)
+  editor_user_id : int(11)
+  created_at : datetime
+  started_at : datetime
+  ended_at : datetime
+}
+
+entity "live_messages" as live_messages {
+  * id : int(11)
+  --
+  live_event_id : int(11)
+  user_id : int(11)
+  message_type : varchar(20)
+  content : text
+  created_at : datetime
+}
+
+users ||--o{ user_interests : has
+interests ||--o{ user_interests : includes
+
+interests ||--o{ news : categorizes
+source ||--o{ news : provides
+
+profile ||--o{ favorite : saves
+news ||--o{ favorite : saved
+
+users ||--o{ favorite_categories : owns
+
+profile ||--o{ comments : writes
+news ||--o{ comments : receives
+
+compte ||--o{ live_events : edits
+live_events ||--o{ live_messages : contains
+compte ||--o{ live_messages : sends
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+allowmixing
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "Utilisateur" as Utilisateur
+
+class "UI s'abonner" as UIAbonner <<boundary>> {
+  - selectedPlan : checkbox
+  -CardFontName : string
+  -CardNumber : int
+  -Expiry : int
+  -CVV : int
+  - indersand : checkbox
+  + saisirInformationPaiement()
+  + clickButtonPayment()
+  + afficher(message : String)
+}
+
+class "C s'abonner" as CAbonner <<control>> {
+  + verifier()
+}
+
+package "Modeles" {
+class "Utilisateur" as UtilisateurModel <<entity>> {
+  -<b>id</b> : int
+  -nomComplet : string
+  -photoProfil : string
+  -role : string
+  -estPremium : boolean
+  -planPremium : string
+  -datePremium : datetime
+  --
+  + update()
+}
+}
+
+Utilisateur -right- UIAbonner
+UIAbonner -down- CAbonner
+CAbonner -down- Modeles
+
+@enduml

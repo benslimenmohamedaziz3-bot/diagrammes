@@ -1,0 +1,51 @@
+@startuml
+allowmixing
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "utilisateur" as Utilisateur
+
+class IU_CommenterActualite <<View>> {
+    -commentaire : String
+    -boutton_post_commentaire : Button
+    +saisir_commentaire()
+    +click_bouton_post_commentaire()
+    +afficher(message : String)
+}
+
+class C_CommenterActualite <<Controller>> {
+    +ajouter()
+}
+
+package "Modeles" {
+class News <<entity>> {
+    - idActualite : int
+    - titre : String
+    - description : String
+    - categorie : String
+    - pays : String
+    - source : String
+    - datePublication : Date
+    - url : String
+    +update()
+}
+
+class Commentaire <<entity>> {
+    -id : int
+    -contenu : String
+    -dateCommentaire : Date
+    +insert()
+}
+}
+
+News -[hidden]down- Commentaire
+
+Utilisateur -right-> IU_CommenterActualite
+IU_CommenterActualite -down-> C_CommenterActualite
+C_CommenterActualite -down-> Modeles
+News -- Commentaire : association
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+allowmixing
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "utilisateur premium" as UtilisateurPremium
+
+class UI_Live <<boundary>> {
+  -buttonOpenRoom : Button
+  + click_button_open_room()
+  + afficherRoom()
+}
+
+class LiveController <<control>> {
+  + openRoom()
+}
+
+package "Modeles" {
+class Room <<entity>> {
+  - <b>id</b> : int
+  - titre : String
+  + select()
+}
+}
+
+UtilisateurPremium -right- UI_Live
+UI_Live -down- LiveController
+LiveController -down- Modeles
+
+@enduml

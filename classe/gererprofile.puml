@@ -1,0 +1,64 @@
+@startuml
+allowmixing
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "utilisateur" as UtilisateurActor
+
+class "UI gerer profile" as UIGererProfile <<boundary>> {
+  - firstName : string
+  - lastName : string
+  - emailAddress : string
+  - profilePhoto : image
+  - currentPassword : string
+  - newPassword : string
+  - confirmPassword : string
+  -buttonChoosePhoto : button
+  - buttonSaveProfile : button
+  - buttonReset : button
+  --
+  + afficher(informationProfile)
+  + modifier()
+  + recuperer()
+}
+
+class "C gerer profile" as CGererProfile <<control>> {
+  + charger()
+  + changer()
+}
+
+package "Modeles" {
+class "profile" as Profile <<entity>> {
+  - <b>id</b> : int
+  - email : String
+  - password : String
+  --
+  + select()
+  + update()
+}
+
+class "utilisateur" as Utilisateur <<entity>> {
+  -<b>id</b> : int
+  -nomComplet : string
+  -photoProfil : string
+  -role : string
+  -estPremium : boolean
+  -planPremium : string
+  -datePremium : datetime
+  --
+  + select()
+  + update()
+}
+}
+
+Profile -[hidden]down- Utilisateur
+
+UtilisateurActor -right- UIGererProfile
+UIGererProfile -right- CGererProfile
+CGererProfile -down- Modeles
+Profile -- Utilisateur : appartient à
+
+@enduml

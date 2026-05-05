@@ -1,0 +1,27 @@
+@startuml
+
+actor "Utilisateur" as Utilisateur
+
+participant ":IU-enregistrerActualité" as IU
+participant ":C-enregistrerActualité" as C
+participant ":Favorite" as Favorite
+
+ref over Utilisateur, Favorite
+D.de sequence relatif au cas d'utilisation << login >>
+end ref
+
+Utilisateur -> IU : 1:clickBtnEnregistrerActualité()
+
+IU -> C : 2:verifier()
+
+C -> Favorite : 3:select()
+
+alt News deja enregistré
+    C -> Favorite : 4:delete()
+    C -> IU : 5:afficher("save article")
+else News non enregistré
+    C -> Favorite : 6:insert()
+    C -> IU : 7:afficher("saved")
+end
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml commenter_actualite
+
+actor utilisateur
+participant ": IU-commenter actualite" as IUCommenterActualite
+participant ": C : commenter actualite" as CCommenterActualite
+participant ": news" as news
+participant ": commentaire" as commentaire
+utilisateur -> IUCommenterActualite : 1 : saisir_commentaire()
+utilisateur -> IUCommenterActualite : 2 : click_button_commenter
+IUCommenterActualite -> CCommenterActualite : 3 : commenter()
+CCommenterActualite -> commentaire : 4 : insert()
+CCommenterActualite -> news : 5 : update() 
+CCommenterActualite --> IUCommenterActualite : 5 : afficher("commentaire enregistré")
+@enduml
+

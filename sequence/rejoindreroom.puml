@@ -1,0 +1,13 @@
+@startuml
+actor "Utilisateur" as Utilisateur
+
+participant ":UI live" as UI
+participant ":C live" as C
+participant ":room" as Room
+
+Utilisateur -> UI : 1:click_button_open_room()
+UI -> C : 2:ouvreRoom()
+C -> Room : 3:select()
+C -> UI : 4:afficherRoom()
+
+@enduml

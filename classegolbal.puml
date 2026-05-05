@@ -1,0 +1,99 @@
+@startuml
+
+left to right direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+class Compte <<entity>> {
+  - <b>id</b> : int
+  - dateCreation : Date
+  --
+  + select()
+  + insert()
+}
+
+class Profile <<entity>> {
+  - <b>id</b> : int
+  - email : String
+  - password : String
+  --
+  + select()
+  + insert()
+  + update()
+}
+
+class Utilisateur <<entity>> {
+  - <b>id</b> : int
+  - nomComplet : String
+  - photoProfil : String
+  - role : String
+  - estPremium : boolean
+  - planPremium : String
+  - datePremium : datetime
+  --
+  + select()
+  + update()
+}
+
+class Interest <<entity>> {
+  - <b>id</b> : int
+  - nom : String
+  --
+  + insert()
+}
+
+class News <<entity>> {
+  - <b>idNews</b> : int
+  - titre : String
+  - description : String
+  - categorie : String
+  - pays : String
+  - source : String
+  - datePublication : Date
+  - url : String
+  --
+  + select()
+  + insert()
+  + update()
+}
+
+class Favorite <<entity>> {
+  - <b>idFavorite</b> : int
+  - dateAjout : Date
+  --
+  + select()
+  + insert()
+  + delete()
+}
+
+class Commentaire <<entity>> {
+  - <b>id</b> : int
+  - contenu : String
+  - dateCommentaire : Date
+  --
+  + insert()
+}
+
+class Room <<entity>> {
+  - <b>id</b> : int
+  - titre : String
+  - description : String
+  - categorie : String
+  - dateCreation : Date
+  --
+  + select()
+  + insert()
+}
+
+Profile "1" -- "1" Compte : possède
+Compte "1" -- "0..*" Interest : choisit
+Profile "1" -- "1" Utilisateur : appartient à
+
+Utilisateur "1" -- "0..*" Favorite : ajoute
+Favorite "0..*" -- "1" News : concerne
+
+Utilisateur "1" -- "0..*" News : publie
+Utilisateur "1" -- "0..*" Commentaire : écrit
+Utilisateur "1" -- "0..*" Room : crée / rejoint
+
+@enduml

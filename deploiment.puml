@@ -1,0 +1,13 @@
+@startuml
+
+node "<<Terminal>> \n Visiteur" as Visiteur
+node "<<Server>> \n Application" as Serveur
+node "<<Terminal >> \n Utilisateur" as Utilisateur
+node "<<Server>> \n Base de données" as BD
+
+Visiteur --> Serveur : <<HTTP>>
+Utilisateur --> Serveur : <<HTTP>>
+
+Serveur --> BD : <<JDBC>>
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+
+actor "Utilisateur" as Utilisateur
+actor "Utilisateur premium" as UtilisateurPremium
+
+rectangle "Systeme" as Systeme {
+  usecase "gerer profile" as GererProfile
+}
+
+Utilisateur -[hidden]down- UtilisateurPremium
+UtilisateurPremium --|> Utilisateur
+Utilisateur -- GererProfile
+
+@enduml

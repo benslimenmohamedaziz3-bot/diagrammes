@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+
+actor "visiteur" as Visiteur
+actor "utilisateur" as Utilisateur
+actor "utilisateur premium" as UtilisateurPremium
+actor "editeur" as Editeur
+
+rectangle "Systeme" as Systeme {
+  usecase "creer compte" as CreerCompte
+  usecase "choisir centre d'interet" as ChoisirInteret
+
+  CreerCompte -[hidden]down- ChoisirInteret
+}
+
+Visiteur -[hidden]down- Utilisateur
+Utilisateur -[hidden]down- UtilisateurPremium
+UtilisateurPremium -[hidden]down- Editeur
+
+Utilisateur -up-|> Visiteur
+UtilisateurPremium -up-|> Utilisateur
+Editeur -up-|> Utilisateur
+
+Visiteur -- CreerCompte
+CreerCompte ..> ChoisirInteret : <<include>>
+
+@enduml

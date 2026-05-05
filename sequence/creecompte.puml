@@ -1,0 +1,28 @@
+@startuml
+
+actor "Visiteur" as Visiteur
+
+participant ":UI-SignUp" as UISignUp
+participant ":UI-Interest" as UIInterest
+participant ":C-SignUp" as CSignUp
+participant ":Compte" as Compte
+participant ":profile" as Profile
+participant ":interest" as Interest
+
+Visiteur -> UISignUp : 1:saisir(email,\npassword,\nconfirm-password)
+Visiteur -> UISignUp : 2:clickBtnContinue()
+
+Visiteur -> UIInterest : 3:choisirInterest()
+Visiteur -> UIInterest : 4:clickBtnComplete()
+UIInterest -> CSignUp : 4:verifier()
+CSignUp -> Profile : 5:select()
+alt Compte existe
+    CSignUp -> UISignUp : 10:afficher("compte existe")
+else Compte n'existe pas
+    CSignUp -> Compte : 13:insert()
+    CSignUp -> Profile : 14:insert()
+    CSignUp -> Interest : 14:insert()
+    CSignUp -> UISignUp : 15:afficher("compte cree")
+end
+
+@enduml

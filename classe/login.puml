@@ -1,0 +1,37 @@
+@startuml
+allowmixing
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor Visiteur
+
+class IULogin <<boundary>> {
+  - email : String
+  - password : String
+  - buttonSignIn : Button
+  + saisir(email, password)
+  + clickBtnSignIn()
+  + afficher()
+}
+
+class CLogin <<control>> {
+  + chercher()
+}
+
+package model {
+  class Profile <<entity>> {
+    - <b>id</b> : int
+    - email : String
+    - password : String
+    + select()
+  }
+}
+
+Visiteur -right- IULogin
+IULogin -down- CLogin
+CLogin -down- model
+
+@enduml

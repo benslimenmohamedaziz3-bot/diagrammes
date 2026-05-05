@@ -1,0 +1,19 @@
+@startuml
+
+actor "visiteur" as Visiteur
+
+participant ":IU-filtrerActualité" as IUFiltrerActualite
+participant ":C-FiltrerActualité" as CFiltrerActualite
+participant ":News" as News
+
+CFiltrerActualite -> CFiltrerActualite : 1: charger(filters)
+CFiltrerActualite -> News : 2: select()
+CFiltrerActualite -> IUFiltrerActualite : 3: affiche(filters)
+
+Visiteur -> IUFiltrerActualite : 4: choisir(filters)
+IUFiltrerActualite -> CFiltrerActualite : 5: verifier(filters)
+CFiltrerActualite -> CFiltrerActualite : 6: charger(actualite)
+CFiltrerActualite -> IUFiltrerActualite : 7: affiche(actualite)
+
+
+@enduml

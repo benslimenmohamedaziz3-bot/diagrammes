@@ -1,0 +1,47 @@
+@startuml
+allowmixing
+top to bottom direction
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "Visiteur" as Visiteur
+
+class IUFiltrerActualite <<boundary>> {
+  - boutonsCategorie : List<Button>
+  - champPays : String
+  - champSource : String
+  - champType : String
+  - champDate : Date
+  --
+  + afficher(filtres)
+  + choisir(filtres)
+  + afficher(actualite)
+}
+
+class CFiltrerActualite <<control>> {
+  + charger(filtres)
+  + charger(actualite)
+  + verifier(filtres)
+}
+package "Modeles" {
+class News <<entity>> {
+  - <b>idNews</b> : int
+  - titre : String
+  - description : String
+  - categorie : String
+  - pays : String
+  - source : String
+  - datePublication : Date
+  - url : String
+  --
+  + select()
+}
+}
+
+Visiteur -right- IUFiltrerActualite
+IUFiltrerActualite -down- CFiltrerActualite
+CFiltrerActualite -down- Modeles
+
+@enduml

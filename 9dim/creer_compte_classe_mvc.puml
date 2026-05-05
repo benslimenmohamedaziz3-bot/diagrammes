@@ -1,0 +1,53 @@
+@startuml
+title Diagramme de classes MVC - Creer compte
+
+skinparam classAttributeIconSize 
+
+
+  class "IUSignUp" <<boundary>> {
+    +saisirInformations()
+    +clickButtonContinue()
+    +afficherMessage(message)
+  }
+
+  class "IUInterest" <<boundary>> {
+    +afficher()
+    +choisirInterest()
+    +clickButtonCreerCompte()
+  }
+
+
+
+  class "CreerCompteController" <<control>> {
+    +verifierInformations()
+    +verifierChoixInteret()
+    +creerCompte()
+  }
+
+
+package "Modele" {
+  class "Compte" <<entity>> {
+    -idCompte : int
+    -nom : String
+    -email : String
+    -motDePasse : String
+    +select()
+    +insert()
+  }
+
+  class "Interest" <<entity>> {
+    -idInterest : int
+    -libelle : String
+    +insert()
+  }
+}
+
+IUSignUp -- CreerCompteController : envoie informations
+IUInterest -- CreerCompteController : envoie choix
+
+
+CreerCompteController --  Modele : utilise
+Interest -- Compte : association 
+
+
+@enduml
